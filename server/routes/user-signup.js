@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const Joi = require('joi');
-const {User} = require('../models/userModel')
+const {User} = require('../models/userModel');
+
+const bcrypt = require('bcrypt')
+
 
 
 router.post('/',async (req, res) => {
@@ -20,7 +23,11 @@ router.post('/',async (req, res) => {
         if (user)
 			return res.status(409).send({ message: "User with given phone already Exist!" });
 
+        //encryting password
+        const salt = await bcrypt.genSalt(Number(process.env.SALT));
+        const hashPassword = await bcrypt.hash(req.body.password, salt);
 
+        
         
         await new User(req.body).save();
         res.status(201).send("User Created Successfully") // success responese...
