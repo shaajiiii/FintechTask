@@ -16,6 +16,7 @@ mongoose.connect(process.env.DATABASE_URL,(err)=>{
 
 const userSignup = require('./routes/user-signup');
 const userLogin = require('./routes/user-login');
+const actions = require('./routes/Actions');
 
 // Middlewares
 app.use(express.json());
@@ -23,6 +24,8 @@ app.use(express.json());
 // Routing
 app.use('/signup',userSignup);
 app.use('/login',userLogin);
+app.use('/actions',actions);
+
 
 
 
