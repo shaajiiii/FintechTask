@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const Joi = require('joi');
 const {User} = require('../models/userModel');
-
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 
 
@@ -27,6 +26,7 @@ router.post('/',async (req, res) => {
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword = await bcrypt.hash(req.body.password, salt);
 
+        req.body.password = hashPassword;
         
         
         await new User(req.body).save();
