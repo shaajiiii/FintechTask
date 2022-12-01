@@ -27,8 +27,6 @@ app.use('/login',userLogin);
 app.use('/actions',actions);
 
 
-
-
 app.listen(PORT,()=>{console.log(`server is listening.... to port ${PORT}`);})
 
 
